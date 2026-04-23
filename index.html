@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Solar Circle | Coming Soon</title>
     <style>
-        /* The Master Cycle - Controls Background and Text Colors */
         body {
             display: flex;
             flex-direction: column;
@@ -14,31 +13,31 @@
             height: 100vh;
             margin: 0;
             font-family: 'Segoe UI', Arial, sans-serif;
-            transition: background-color 1.5s ease, color 1.5s ease;
+            transition: background-color 2s ease;
             overflow: hidden;
-            /* Syncs background color with the rotation */
-            animation: skyCycle 15s infinite linear;
+            /* Control the speed here (e.g., 30s for slower) */
+            animation: skyCycle 20s infinite linear;
         }
 
         .orbit-container {
             position: relative;
-            width: 450px;
-            height: 300px;
+            width: 100%;
+            height: 350px;
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 1; /* Keeps icons behind text if they stray */
         }
 
-        /* The Cartoon Solar Panel */
         .solar-hero {
             position: relative;
             width: 110px;
             height: 70px;
             background: #0077b6;
-            border: 5px solid currentColor; /* Matches text color automatically */
+            border: 5px solid currentColor;
             border-radius: 10px;
             transform: perspective(500px) rotateX(25deg);
-            box-shadow: 0 10px 0 rgba(0,0,0,0.2), 0 15px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 0 rgba(0,0,0,0.2);
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(2, 1fr);
@@ -49,31 +48,27 @@
 
         .grid-cell { background: rgba(255,255,255,0.2); border-radius: 2px; }
 
-        /* The Rotating Wheel */
+        /* The Rotating Wheel - Must match body animation speed */
         .cycle-wheel {
             position: absolute;
-            width: 450px;
-            height: 450px;
-            animation: fullRotation 15s infinite linear;
+            width: 500px;
+            height: 500px;
+            animation: fullRotation 20s infinite linear;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .day-group {
+        .day-group, .night-group {
             position: absolute;
-            top: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .night-group {
-            position: absolute;
-            bottom: 0;
-        }
+        .day-group { top: 0; }
+        .night-group { bottom: 0; }
 
-        /* SUN & CLOUD */
         .sun {
             position: absolute; top: -15px; left: -10px;
             width: 55px; height: 55px;
@@ -88,29 +83,42 @@
         .cloud::before { width: 55px; height: 55px; top: -25px; left: 15px; }
         .cloud::after { width: 45px; height: 45px; top: -15px; left: 45px; }
 
-        /* MOON */
         .moon {
             width: 50px; height: 50px;
             background: transparent;
             border-radius: 50%;
-            box-shadow: 12px 12px 0 0 #f1c40f; /* Yellow crescent */
-            transform: rotate(160deg); /* Oriented for its position in orbit */
+            box-shadow: 12px 12px 0 0 #f1c40f;
+            transform: rotate(160deg);
         }
 
-        /* ANIMATIONS */
+        /* TIMING EXPLANATION:
+           0% Sun is at 9 o'clock (Sunrise)
+           25% Sun is at 12 o'clock (Noon - Brightest)
+           50% Sun is at 3 o'clock (Sunset)
+           75% Moon is at 12 o'clock (Midnight - Darkest)
+        */
         @keyframes fullRotation {
             from { transform: rotate(-90deg); }
             to { transform: rotate(270deg); }
         }
 
         @keyframes skyCycle {
-            0%, 100% { background-color: #0b1426; color: white; } /* Midnight */
-            25% { background-color: #f4f7f9; color: #002d5b; }    /* Midday */
-            50% { background-color: #0b1426; color: white; }    /* Midnight */
-            75% { background-color: #f4f7f9; color: #002d5b; }    /* Midday (Loop) */
+            0%   { background-color: #dbe9f4; color: #002d5b; } /* Sunrise */
+            25%  { background-color: #f4f7f9; color: #002d5b; } /* Noon */
+            50%  { background-color: #dbe9f4; color: #002d5b; } /* Sunset */
+            70%  { background-color: #0b1426; color: white; }   /* Evening */
+            75%  { background-color: #050a14; color: white; }   /* Midnight */
+            80%  { background-color: #0b1426; color: white; }   /* Pre-dawn */
+            100% { background-color: #dbe9f4; color: #002d5b; } /* Sunrise loop */
         }
 
-        h1 { margin-top: 40px; font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; }
+        /* Text moved down to avoid orbit path */
+        .text-content {
+            margin-top: 60px;
+            z-index: 10;
+        }
+
+        h1 { font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; margin: 0; }
         p { color: #ff8c00; font-weight: bold; font-size: 1.2rem; margin: 5px 0; }
         .tagline { margin-top: 15px; font-size: 0.85rem; opacity: 0.8; letter-spacing: 1px; }
     </style>
@@ -129,17 +137,18 @@
         </div>
 
         <div class="solar-hero">
-            <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+            <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell)</div>
             <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
         </div>
     </div>
 
-    <h1>THE SOLAR CIRCLE</h1>
-    <p>Waiting for the sunshine...</p>
-
-    <div class="tagline">
-        REAL DATA. SHARED SIMPLY.<br>
-        <strong>Launching soon</strong>
+    <div class="text-content">
+        <h1>THE SOLAR CIRCLE</h1>
+        <p>Waiting for the sunshine...</p>
+        <div class="tagline">
+            REAL DATA. SHARED SIMPLY.<br>
+            <strong>Launching soon</strong>
+        </div>
     </div>
 
 </body>
