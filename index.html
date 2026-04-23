@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Solar Circle | Coming Soon</title>
     <style>
+        /* The Master Cycle - Controls Background and Text Colors */
         body {
-            background-color: #f4f7f9;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -14,15 +14,16 @@
             height: 100vh;
             margin: 0;
             font-family: 'Segoe UI', Arial, sans-serif;
-            color: #002d5b;
-            text-align: center;
+            transition: background-color 1.5s ease, color 1.5s ease;
             overflow: hidden;
+            /* Syncs background color with the rotation */
+            animation: skyCycle 15s infinite linear;
         }
 
         .orbit-container {
             position: relative;
             width: 450px;
-            height: 350px;
+            height: 300px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -34,10 +35,10 @@
             width: 110px;
             height: 70px;
             background: #0077b6;
-            border: 5px solid #002d5b;
+            border: 5px solid currentColor; /* Matches text color automatically */
             border-radius: 10px;
             transform: perspective(500px) rotateX(25deg);
-            box-shadow: 0 10px 0 #005a8a, 0 15px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 0 rgba(0,0,0,0.2), 0 15px 25px rgba(0,0,0,0.1);
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(2, 1fr);
@@ -46,34 +47,30 @@
             z-index: 5;
         }
 
-        .grid-cell { background: rgba(255,255,255,0.1); border-radius: 2px; }
+        .grid-cell { background: rgba(255,255,255,0.2); border-radius: 2px; }
 
-        /* The Giant Rotating Wheel */
+        /* The Rotating Wheel */
         .cycle-wheel {
             position: absolute;
-            width: 400px;
-            height: 400px;
+            width: 450px;
+            height: 450px;
             animation: fullRotation 15s infinite linear;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Weather Group (Sun/Cloud) */
         .day-group {
             position: absolute;
-            top: 0; /* Top of the wheel */
+            top: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transform: rotate(0deg); /* Keeps it upright */
         }
 
-        /* Night Group (Moon) */
         .night-group {
             position: absolute;
-            bottom: 0; /* Bottom of the wheel */
-            transform: rotate(180deg); /* Keeps it upright */
+            bottom: 0;
         }
 
         /* SUN & CLOUD */
@@ -81,32 +78,41 @@
             position: absolute; top: -15px; left: -10px;
             width: 55px; height: 55px;
             background: #ffcc00; border-radius: 50%;
-            box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+            box-shadow: 0 0 25px rgba(255, 204, 0, 0.6);
         }
         .cloud {
             position: relative; width: 100px; height: 40px;
             background: #95a5a6; border-radius: 50px;
         }
-        .cloud::before { content: ''; position: absolute; width: 50px; height: 50px; background: #95a5a6; border-radius: 50%; top: -25px; left: 15px; }
-        .cloud::after { content: ''; position: absolute; width: 40px; height: 40px; background: #95a5a6; border-radius: 50%; top: -15px; left: 45px; }
+        .cloud::before, .cloud::after { content: ''; position: absolute; background: #95a5a6; border-radius: 50%; }
+        .cloud::before { width: 55px; height: 55px; top: -25px; left: 15px; }
+        .cloud::after { width: 45px; height: 45px; top: -15px; left: 45px; }
 
-        /* MOON (Crescent) */
+        /* MOON */
         .moon {
             width: 50px; height: 50px;
             background: transparent;
             border-radius: 50%;
-            box-shadow: 12px 12px 0 0 #002d5b; /* Creates the crescent shape */
-            transform: rotate(-20deg);
+            box-shadow: 12px 12px 0 0 #f1c40f; /* Yellow crescent */
+            transform: rotate(160deg); /* Oriented for its position in orbit */
         }
 
+        /* ANIMATIONS */
         @keyframes fullRotation {
             from { transform: rotate(-90deg); }
             to { transform: rotate(270deg); }
         }
 
-        h1 { margin-top: 40px; font-size: 2rem; font-weight: 900; }
-        p { color: #ff8c00; font-weight: bold; font-size: 1.1rem; margin: 5px 0; }
-        .tagline { margin-top: 15px; font-size: 0.8rem; color: #777; letter-spacing: 1px; }
+        @keyframes skyCycle {
+            0%, 100% { background-color: #0b1426; color: white; } /* Midnight */
+            25% { background-color: #f4f7f9; color: #002d5b; }    /* Midday */
+            50% { background-color: #0b1426; color: white; }    /* Midnight */
+            75% { background-color: #f4f7f9; color: #002d5b; }    /* Midday (Loop) */
+        }
+
+        h1 { margin-top: 40px; font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; }
+        p { color: #ff8c00; font-weight: bold; font-size: 1.2rem; margin: 5px 0; }
+        .tagline { margin-top: 15px; font-size: 0.85rem; opacity: 0.8; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -133,7 +139,7 @@
 
     <div class="tagline">
         REAL DATA. SHARED SIMPLY.<br>
-        <strong>LAUNCHING SOON</strong>
+        <strong>Launching soon</strong>
     </div>
 
 </body>
