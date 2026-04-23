@@ -13,132 +13,126 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             color: #002d5b;
             text-align: center;
         }
 
-        .scene {
+        .container {
             position: relative;
             width: 300px;
-            height: 220px;
+            height: 250px;
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
         }
 
-        /* The Weather Icon (Sun in Cloud) */
-        .weather-wrap {
-            position: absolute;
-            top: 0;
-            animation: drift 10s infinite ease-in-out;
-            z-index: 10;
-        }
-
-        .icon-sun {
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            width: 55px;
-            height: 55px;
-            background: #ffce00;
-            border-radius: 50%;
-            box-shadow: 0 0 15px rgba(255, 206, 0, 0.5);
-        }
-
-        .icon-cloud {
+        /* The Cartoon Solar Panel Icon */
+        .solar-hero {
             position: relative;
-            width: 110px;
-            height: 45px;
-            background: #7f8c8d; /* Solid moody grey */
-            border-radius: 50px;
-        }
-        .icon-cloud::after, .icon-cloud::before {
-            content: '';
-            position: absolute;
-            background: #7f8c8d;
-            border-radius: 50%;
-        }
-        .icon-cloud::after { width: 55px; height: 55px; top: -25px; left: 15px; }
-        .icon-cloud::before { width: 45px; height: 45px; top: -15px; left: 50px; }
-
-        /* The Cartoon House */
-        .house-body {
-            width: 120px;
-            height: 80px;
-            background: #ffffff;
-            border: 4px solid #002d5b;
-            border-radius: 2px;
-            position: relative;
-        }
-
-        .roof {
-            position: absolute;
-            top: -50px;
-            left: -14px;
-            width: 0;
-            height: 0;
-            border-left: 74px solid transparent;
-            border-right: 74px solid transparent;
-            border-bottom: 50px solid #002d5b;
-        }
-
-        /* Cartoon Solar Panel */
-        .cartoon-panel {
-            position: absolute;
-            top: -35px;
-            left: 20px;
-            width: 50px;
-            height: 30px;
-            background: #0096ff;
-            border: 3px solid #ffffff;
-            border-radius: 4px;
-            transform: skewX(-15deg);
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            width: 140px;
+            height: 90px;
+            background: #0077b6;
+            border: 6px solid #002d5b;
+            border-radius: 12px;
+            transform: perspective(500px) rotateX(20deg);
+            box-shadow: 0 15px 0 #005a8a, 0 20px 30px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 4px;
+            padding: 6px;
             overflow: hidden;
-            z-index: 5;
         }
-        /* Gloss Shine on Panel */
-        .cartoon-panel::after {
+
+        /* Glossy overlay for the "Glass" look */
+        .solar-hero::before {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 50%;
-            background: rgba(255,255,255,0.2);
+            top: 0; left: 0; width: 100%; height: 50%;
+            background: rgba(255,255,255,0.15);
+            z-index: 2;
+        }
+
+        .grid-cell {
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+        }
+
+        /* The Weather Icon Group */
+        .weather-float {
+            position: absolute;
+            top: 20px;
+            z-index: 10;
+            animation: drift 12s infinite ease-in-out;
+        }
+
+        .sun {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 60px;
+            height: 60px;
+            background: #ffcc00;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+        }
+
+        .cloud {
+            position: relative;
+            width: 120px;
+            height: 50px;
+            background: #95a5a6; /* Moody Grey */
+            border-radius: 50px;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+        }
+        .cloud::before {
+            content: ''; position: absolute;
+            width: 60px; height: 60px;
+            background: #95a5a6;
+            border-radius: 50%;
+            top: -30px; left: 20px;
+        }
+        .cloud::after {
+            content: ''; position: absolute;
+            width: 50px; height: 50px;
+            background: #95a5a6;
+            border-radius: 50%;
+            top: -20px; left: 55px;
         }
 
         @keyframes drift {
-            0% { transform: translateX(-180px); opacity: 0; }
+            0% { transform: translateX(-220px); opacity: 0; }
             15% { opacity: 1; }
             85% { opacity: 1; }
-            100% { transform: translateX(180px); opacity: 0; }
+            100% { transform: translateX(220px); opacity: 0; }
         }
 
-        h1 { margin-top: 40px; font-size: 1.8rem; font-weight: 900; letter-spacing: -0.5px; }
-        p { color: #ff8c00; font-weight: bold; font-size: 1.1rem; margin: 5px 0; }
-        .footer-text { margin-top: 20px; font-size: 0.85rem; color: #888; line-height: 1.5; }
+        h1 { margin-top: 20px; font-size: 2rem; font-weight: 900; }
+        p { color: #ff8c00; font-weight: bold; font-size: 1.2rem; margin: 5px 0; }
+        .tagline { margin-top: 20px; font-size: 0.9rem; color: #777; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
-    <div class="scene">
-        <div class="weather-wrap">
-            <div class="icon-sun"></div>
-            <div class="icon-cloud"></div>
+    <div class="container">
+        <div class="weather-float">
+            <div class="sun"></div>
+            <div class="cloud"></div>
         </div>
 
-        <div class="house-body">
-            <div class="roof"></div>
-            <div class="cartoon-panel"></div>
+        <div class="solar-hero">
+            <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+            <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
         </div>
     </div>
 
     <h1>THE SOLAR CIRCLE</h1>
     <p>Waiting for the sunshine...</p>
 
-    <div class="footer-text">
-        Real data. Shared simply.<br>
-        <strong>Launching Soon</strong>
+    <div class="tagline">
+        REAL DATA. SHARED SIMPLY.<br>
+        <strong>LAUNCHING SOON</strong>
     </div>
 
 </body>
