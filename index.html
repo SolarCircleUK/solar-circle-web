@@ -6,132 +6,102 @@
     <title>The Solar Circle | Coming Soon</title>
     <style>
         body {
-            background-color: #f0f2f5;
+            background-color: #f4f7f9;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
             color: #002d5b;
             text-align: center;
-            overflow: hidden;
         }
 
-        .stage {
+        .scene {
             position: relative;
             width: 300px;
-            height: 200px;
-            margin-bottom: 20px;
+            height: 220px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
         }
 
-        /* The Sun */
-        .sun {
+        /* The Weather Icon (Sun in Cloud) */
+        .weather-wrap {
             position: absolute;
-            top: 20px;
-            right: 80px;
-            width: 50px;
-            height: 50px;
-            background: #ffcc00;
+            top: 0;
+            animation: drift 10s infinite ease-in-out;
+            z-index: 10;
+        }
+
+        .icon-sun {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 55px;
+            height: 55px;
+            background: #ffce00;
             border-radius: 50%;
-            box-shadow: 0 0 30px #ffcc00;
+            box-shadow: 0 0 15px rgba(255, 206, 0, 0.5);
         }
 
-        /* The House */
-        .house {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 70px;
-            background: #d1d8e0;
-            border: 3px solid #002d5b;
+        .icon-cloud {
+            position: relative;
+            width: 110px;
+            height: 45px;
+            background: #7f8c8d; /* Solid moody grey */
+            border-radius: 50px;
         }
-        /* The Roof */
-        .house::before {
+        .icon-cloud::after, .icon-cloud::before {
             content: '';
             position: absolute;
-            top: -43px;
-            left: -3px;
+            background: #7f8c8d;
+            border-radius: 50%;
+        }
+        .icon-cloud::after { width: 55px; height: 55px; top: -25px; left: 15px; }
+        .icon-cloud::before { width: 45px; height: 45px; top: -15px; left: 50px; }
+
+        /* The Cartoon House */
+        .house-body {
+            width: 120px;
+            height: 80px;
+            background: #ffffff;
+            border: 4px solid #002d5b;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .roof {
+            position: absolute;
+            top: -50px;
+            left: -14px;
             width: 0;
             height: 0;
-            border-left: 53px solid transparent;
-            border-right: 53px solid transparent;
-            border-bottom: 40px solid #002d5b;
+            border-left: 74px solid transparent;
+            border-right: 74px solid transparent;
+            border-bottom: 50px solid #002d5b;
         }
 
-        /* The Solar Panel on the roof */
-        .panel {
+        /* Cartoon Solar Panel */
+        .cartoon-panel {
             position: absolute;
-            top: -30px;
+            top: -35px;
             left: 20px;
-            width: 45px;
-            height: 25px;
-            background: #0077b6;
-            border: 1px solid #fff;
-            transform: skewX(-20deg);
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            z-index: 2;
+            width: 50px;
+            height: 30px;
+            background: #0096ff;
+            border: 3px solid #ffffff;
+            border-radius: 4px;
+            transform: skewX(-15deg);
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            overflow: hidden;
+            z-index: 5;
         }
-        .cell { background: rgba(255,255,255,0.2); }
-
-        /* The Darker Cloud */
-        .cloud {
-            position: absolute;
-            top: 30px;
-            width: 100px;
-            height: 40px;
-            background: #95a5a6; /* Darker grey */
-            border-radius: 50px;
-            animation: drift 10s infinite linear;
-            z-index: 3;
-        }
-        .cloud::after, .cloud::before {
+        /* Gloss Shine on Panel */
+        .cartoon-panel::after {
             content: '';
             position: absolute;
-            background: #95a5a6;
-            border-radius: 50%;
-        }
-        .cloud::after { width: 50px; height: 50px; top: -25px; left: 15px; }
-        .cloud::before { width: 40px; height: 40px; top: -15px; left: 45px; }
-
-        @keyframes drift {
-            0% { left: -150px; opacity: 0; }
-            10% { opacity: 1; }
-            50% { left: 100px; }
-            90% { opacity: 1; }
-            100% { left: 350px; opacity: 0; }
-        }
-
-        h1 { margin-top: 20px; font-weight: 800; letter-spacing: 1px; }
-        p { color: #ff8c00; font-weight: bold; margin-top: 5px; }
-        .status { margin-top: 25px; font-size: 0.9rem; color: #555; }
-    </style>
-</head>
-<body>
-
-    <div class="stage">
-        <div class="sun"></div>
-        <div class="house">
-            <div class="panel">
-                <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-                <div class="cell"></div><div class="cell"></div><div class="cell"></div>
-            </div>
-        </div>
-        <div class="cloud"></div>
-    </div>
-
-    <h1>THE SOLAR CIRCLE</h1>
-    <p>Waiting for the sunshine...</p>
-
-    <div class="status">
-        Real data. Shared simply.<br>
-        <strong>Launching Soon</strong>
-    </div>
-
-</body>
-</html>
+            top: 0; left: 0;
+            width: 100%; height: 50%;
+            background: rgba(255,
