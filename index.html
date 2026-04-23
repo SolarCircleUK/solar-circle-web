@@ -15,7 +15,6 @@
             font-family: 'Segoe UI', Arial, sans-serif;
             transition: background-color 2s ease;
             overflow: hidden;
-            /* Control the speed here (e.g., 30s for slower) */
             animation: skyCycle 20s infinite linear;
         }
 
@@ -26,7 +25,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1; /* Keeps icons behind text if they stray */
+            z-index: 1;
         }
 
         .solar-hero {
@@ -46,9 +45,8 @@
             z-index: 5;
         }
 
-        .grid-cell { background: rgba(255,255,255,0.2); border-radius: 2px; }
+        .grid-cell { background: rgba(255,255,255,0.2); border-radius: 2px; height: 100%; width: 100%; }
 
-        /* The Rotating Wheel - Must match body animation speed */
         .cycle-wheel {
             position: absolute;
             width: 500px;
@@ -91,36 +89,39 @@
             transform: rotate(160deg);
         }
 
-        /* TIMING EXPLANATION:
-           0% Sun is at 9 o'clock (Sunrise)
-           25% Sun is at 12 o'clock (Noon - Brightest)
-           50% Sun is at 3 o'clock (Sunset)
-           75% Moon is at 12 o'clock (Midnight - Darkest)
-        */
         @keyframes fullRotation {
             from { transform: rotate(-90deg); }
             to { transform: rotate(270deg); }
         }
 
         @keyframes skyCycle {
-            0%   { background-color: #dbe9f4; color: #002d5b; } /* Sunrise */
-            25%  { background-color: #f4f7f9; color: #002d5b; } /* Noon */
-            50%  { background-color: #dbe9f4; color: #002d5b; } /* Sunset */
-            70%  { background-color: #0b1426; color: white; }   /* Evening */
-            75%  { background-color: #050a14; color: white; }   /* Midnight */
-            80%  { background-color: #0b1426; color: white; }   /* Pre-dawn */
-            100% { background-color: #dbe9f4; color: #002d5b; } /* Sunrise loop */
+            0%   { background-color: #0b1426; color: white; } /* Night Start */
+            15%  { background-color: #dbe9f4; color: #002d5b; } /* Dawn */
+            25%  { background-color: #f4f7f9; color: #002d5b; } /* Midday Sun */
+            35%  { background-color: #dbe9f4; color: #002d5b; } /* Sunset */
+            50%  { background-color: #0b1426; color: white; }   /* Night */
+            75%  { background-color: #050a14; color: white; }   /* Midnight Moon */
+            100% { background-color: #0b1426; color: white; }   /* Night End */
         }
 
-        /* Text moved down to avoid orbit path */
         .text-content {
             margin-top: 60px;
             z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         h1 { font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; margin: 0; }
         p { color: #ff8c00; font-weight: bold; font-size: 1.2rem; margin: 5px 0; }
-        .tagline { margin-top: 15px; font-size: 0.85rem; opacity: 0.8; letter-spacing: 1px; }
+        .tagline { 
+            margin-top: 15px; 
+            font-size: 0.85rem; 
+            opacity: 0.8; 
+            letter-spacing: 1px; 
+            text-align: center;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -137,7 +138,7 @@
         </div>
 
         <div class="solar-hero">
-            <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell)</div>
+            <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
             <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
         </div>
     </div>
